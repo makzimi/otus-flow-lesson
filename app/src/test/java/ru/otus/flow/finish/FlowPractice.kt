@@ -91,13 +91,10 @@ class FlowPractice {
     @Test
     fun channel_produce() {
         runBlocking {
-            var channel : ReceiveChannel<Animal> = Channel()
-            launch {
-                channel = produce {
-                    send(Cat)
-                    send(Dog)
-                    send(Fish)
-                }
+            val channel = produce {
+                send(Cat)
+                send(Dog)
+                send(Fish)
             }
 
             launch {
@@ -111,16 +108,13 @@ class FlowPractice {
     @Test
     fun channel_produce_with_capacity() {
         runBlocking {
-            var channel : ReceiveChannel<Animal> = Channel()
-            launch {
-                channel = produce(capacity = 2) {
-                    send(Cat)
-                    println("Cat has been sent")
-                    send(Dog)
-                    println("Dog has been sent")
-                    send(Fish)
-                    println("Fish has been sent")
-                }
+            val channel = produce(capacity = 2) {
+                send(Cat)
+                println("Cat has been sent")
+                send(Dog)
+                println("Dog has been sent")
+                send(Fish)
+                println("Fish has been sent")
             }
 
             launch {
@@ -137,19 +131,14 @@ class FlowPractice {
     @Test
     fun channel_produce_conflate() {
         runBlocking {
-            var channel : ReceiveChannel<Animal> = Channel()
-            launch {
-                channel = produce(capacity = CONFLATED) {
-                    send(Cat)
-                    println("Cat has been sent")
-                    send(Dog)
-                    println("Dog has been sent")
-                    send(Fish)
-                    println("Fish has been sent")
-                }
+            val channel = produce(capacity = CONFLATED) {
+                send(Cat)
+                println("Cat has been sent")
+                send(Dog)
+                println("Dog has been sent")
+                send(Fish)
+                println("Fish has been sent")
             }
-
-            delay(100)
 
             launch {
                 channel.consumeEach { animal ->
@@ -251,9 +240,9 @@ class FlowPractice {
     private fun flowOfNumbers(n: Int, delay: Long = 0L, withLog: Boolean = false) = flow {
         for (i in 1..n) {
             delay(delay)
-            if (withLog) println("  Before emit i")
+            if (withLog) println("  Before emit $i")
             emit(i)
-            if (withLog) println("  After emit i")
+            if (withLog) println("  After emit $i")
         }
     }
 

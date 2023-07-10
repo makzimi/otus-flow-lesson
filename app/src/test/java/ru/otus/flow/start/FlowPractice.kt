@@ -16,7 +16,9 @@ import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.buffer
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.channelFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filterNot
 import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.flatMapLatest
@@ -26,6 +28,7 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.transform
 import kotlinx.coroutines.flow.zip
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -38,6 +41,7 @@ import ru.otus.flow.Animal.Cat
 import ru.otus.flow.Animal.Dog
 import ru.otus.flow.Animal.Fish
 import ru.otus.flow.start.FlowPractice.FakeAnimalApi.Callback
+import kotlin.math.abs
 import kotlin.system.measureTimeMillis
 
 class FlowPractice {
@@ -120,9 +124,9 @@ class FlowPractice {
     private fun flowOfNumbers(n: Int, delay: Long = 0L, withLog: Boolean = false) = flow {
         for (i in 1..n) {
             delay(delay)
-            if (withLog) println("  Before emit i")
+            if (withLog) println("  Before emit $i")
             emit(i)
-            if (withLog) println("  After emit i")
+            if (withLog) println("  After emit $i")
         }
     }
 
@@ -155,7 +159,7 @@ class FlowPractice {
     @Test
     fun flow_customOperator() {
         runBlocking {
-            // distinctUntilTime
+            //distinctUntilTime
         }
     }
 

@@ -9,6 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import ru.otus.flow.data.RAMRetrofitService
 import ru.otus.flow.domain.CharactersRepository
 import ru.otus.flow.presentation.CustomViewModelFactory
+import ru.otus.flow.presentation.finish.FinishCustomViewModelFactory
 
 class Injector(private val context: Context) {
 
@@ -36,5 +37,9 @@ class Injector(private val context: Context) {
 
     fun provideViewModelFactory(): ViewModelProvider.Factory {
         return CustomViewModelFactory(provideRepository())
+    }
+
+    fun provideFinishViewModelFactory(): ViewModelProvider.Factory {
+        return FinishCustomViewModelFactory(provideRepository())
     }
 }

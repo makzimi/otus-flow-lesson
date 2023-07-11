@@ -1,3 +1,4 @@
 <resources>
-  <string name="app_name">OtusAndroidFlow</string>
+    <string name="app_name">OtusAndroidFlow</string>
+    <string name="message_empty_string">List is empty</string>
 </resources>
